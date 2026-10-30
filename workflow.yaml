@@ -1,0 +1,30 @@
+name: Verify TOAM Paper
+on:
+  workflow_dispatch:
+    inputs: {}
+jobs:
+  run-workflow:
+    runs-on: [self-hosted, ares]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Set up Python (uv)
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.cargo/bin:$PATH"
+          uv venv --python 3.11
+          source .venv/bin/activate
+          uv pip install -r requirements.txt
+      - name: Generate synthetic data
+        run: |
+          python scripts/generate_data.py
+      - name: Run analysis & create plots
+        run: |
+          python scripts/analysis.py
+      - name: Commit results
+        run: |
+          git config user.name "clio-bot"
+          git config user.email "clio-bot@local"
+          git add data/*.csv docs/*.md *.png
+          git commit -m "Add simulated data and analysis results"
+          git push
