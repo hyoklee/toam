@@ -1,0 +1,28 @@
+host=ares-comp-10 cpu="Intel(R) Xeon(R) Silver 4114 CPU @ 2.20GHz" cpus=16 start=2026-10-30T20:24:36-05:00
+python 3.12.13 numpy 2.4.6 pandas 3.1.0 matplotlib 3.10.9 scipy 1.17.1
+TIME vista.generate_data it1 0.91 s maxrss 72428 KB
+TIME vista.analysis it1 2.87 s maxrss 110408 KB
+TIME vista.generate_data it2 0.89 s maxrss 72368 KB
+TIME vista.analysis it2 2.70 s maxrss 110256 KB
+TIME vista.generate_data it3 0.84 s maxrss 72392 KB
+TIME vista.analysis it3 2.72 s maxrss 110544 KB
+TIME vista.generate_data it4 0.92 s maxrss 72676 KB
+TIME vista.analysis it4 2.66 s maxrss 110472 KB
+TIME vista.generate_data it5 0.89 s maxrss 72376 KB
+TIME vista.analysis it5 2.78 s maxrss 109784 KB
+TIME gemma.gen_data it1 1.28 s maxrss 68708 KB
+TIME gemma.analyze it1 3.20 s maxrss 105184 KB
+TIME gemma.gen_data it2 1.26 s maxrss 68904 KB
+TIME gemma.analyze it2 2.18 s maxrss 105932 KB
+TIME gemma.gen_data it3 1.30 s maxrss 68692 KB
+TIME gemma.analyze it3 2.31 s maxrss 105872 KB
+TIME gemma.gen_data it4 1.30 s maxrss 68984 KB
+TIME gemma.analyze it4 2.28 s maxrss 105948 KB
+TIME gemma.gen_data it5 1.35 s maxrss 68792 KB
+TIME gemma.analyze it5 2.21 s maxrss 106028 KB
+TIME claude.run_all it1 8.74 s maxrss 154932 KB
+TIME claude.run_all it2 8.33 s maxrss 154480 KB
+TIME claude.run_all it3 8.35 s maxrss 154840 KB
+TIME claude.run_all it4 8.31 s maxrss 154896 KB
+TIME claude.run_all it5 8.24 s maxrss 154032 KB
+end=2026-10-30T20:25:57-05:00
