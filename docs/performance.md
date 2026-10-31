@@ -53,3 +53,45 @@ Slurm accounting is disabled on Ares, so there is no job elapsed time. The 10 ti
 | Claude Code rewrite (`run_all.py`, 16 processes) | 8.28 s | 151 MB | Same five checks, plus a 4000-campaign Basquin Monte Carlo and a 0.5° Fatemi-Socie plane scan |
 
 **These numbers measure speed, not correctness.** `analysis.py` sets El Haddad's `area0` to a placeholder (`baseline**2/100`), not Eq. 4. Its TO-AB and TO-VT values (200.2 and 222.1 MPa) are therefore not Eq. 3 predictions. With Eq. 3–4 (√area0 = 448 µm), the roughness predictions are 178.5 MPa for TO-AB and 193.9 MPa for TO-VT.
+
+## clio-core (IOWARP=1) on Ares
+
+**Question:** did clio-core help when the clio agent with Gemma ran this experiment?
+
+**Answer: no.** The agents' runs never turned clio-core on. Turning it on by hand (`IOWARP=1`) changes neither the timings nor the outputs of any of the three workflows. It costs 4.1 s to start the runtime and about 3 MB more memory per process.
+
+- **The agent runs never used clio-core.** Gemma's job script (`toam_gemma/ares/run_toam.sbatch`) and the agents' Ares jobs (25151, 25165, 25178, 25307) run plain `python` with no IOWarp runtime and no adapter. In the clio agent session ledgers, the only clio capability called is the task board (`gateway` → `tasks`), and no clio-core runs were recorded (`runIds: []`).
+- **Setup for this test.** Ares job 25309, on `ares-comp-10` (`--exclusive`), is the same node as job 25308. In one job, all three workflows ran 5 times natively, then 5 times with `IOWARP=1`. `IOWARP=1` follows `~/bin/run_case7_dev.sbatch`:
+  - start `clio_run` with the RAM-tier config `chimaera_case7.yaml`;
+  - wait for "All pools created";
+  - then `LD_PRELOAD=core_dev_miv_1020/install/lib/libclio_cte_posix.so`, the same clio-core build as the MiV case 7 runs.
+
+  The adapter was confirmed mapped into the Python process ([`ares/perf_iowarp.sbatch`](../ares/perf_iowarp.sbatch), log [`ares/toam_iowarp_25309.log`](../ares/toam_iowarp_25309.log)).
+
+| workflow | native, iteration 1 | native, iterations 2–5 | IOWARP=1, iteration 1 | IOWARP=1, iterations 2–5 | change (2–5) | max RSS |
+|---|---|---|---|---|---|---|
+| this repo (clio agent, gpt-oss) | 4.38 s | 3.57 s | 3.54 s | 3.52 s | −1.3% | 107 → 110 MB |
+| Gemma 4 31B clio agent | 4.36 s | 3.51 s | 3.54 s | 3.62 s | +3.2% | 103 → 106 MB |
+| Claude Code rewrite (16 processes) | 8.53 s | 8.34 s | 8.45 s | 8.37 s | +0.4% | 151 → 154 MB |
+
+Per script, iterations 2–5, with the standard deviation across iterations:
+
+| script | native | IOWARP=1 | change |
+|---|---|---|---|
+| `generate_data.py` (this repo) | 0.88 ± 0.06 s | 0.86 ± 0.02 s | −2.3% |
+| `analysis.py` (this repo) | 2.69 ± 0.03 s | 2.66 ± 0.04 s | −1.0% |
+| `gen_data.py` (Gemma) | 1.29 ± 0.04 s | 1.34 ± 0.03 s | +3.9% |
+| `analyze.py` (Gemma) | 2.22 ± 0.08 s | 2.28 ± 0.07 s | +2.8% |
+| `run_all.py` (Claude Code) | 8.34 ± 0.10 s | 8.37 ± 0.07 s | +0.4% |
+
+- **The differences are noise.** All changes are within ±4%, which is about 1–2 standard deviations, and they go in both directions. The iteration-1 times look faster with `IOWARP=1` only because the native block ran first, when Python's files were not yet in the page cache. The `IOWARP=1` block ran second, with everything already cached.
+- **The outputs are identical.** All files match between modes. The one exception is the `elapsed_s` field that `run_all.py` writes into its own `summary.json`.
+- **Overhead.** Starting the runtime took **4.1 s**. That is longer than one whole run of either agent workflow, so with `IOWARP=1` every job is slower overall. The preloaded adapter adds about 3 MB of resident memory to each process.
+- **Why nothing changes.**
+  - The POSIX adapter only routes paths that contain a `clio::` component. These workflows write plain paths, so the adapter intercepts calls and passes them all through.
+  - The I/O is tiny: a few KB of CSV, JSON and text plus a few PNGs per run.
+  - Run time is dominated by Python start-up, imports and numerics (see above).
+  - Even with `clio::` paths, there would be at most a few milliseconds of I/O to speed up.
+- **What did shape Gemma's result.** The model and clio-coder's agent loop did, not clio-core:
+  - Its task-board calls were malformed and stalled the first turn.
+  - The context engine evicted and compacted the conversation late (27.1k → 12k tokens), because the ALCF context window is unknown to clio-coder.

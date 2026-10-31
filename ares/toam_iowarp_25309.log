@@ -1,0 +1,58 @@
+host=ares-comp-10 cpu="Intel(R) Xeon(R) Silver 4114 CPU @ 2.20GHz" start=2026-10-30T20:59:19-05:00 core=/home/hyoklee/core_dev_miv_1020/install/lib/libclio_cte_posix.so
+TIME native vista.generate_data it1 1.50 s maxrss 72136 KB
+TIME native vista.analysis it1 2.88 s maxrss 109860 KB
+TIME native vista.generate_data it2 0.93 s maxrss 72384 KB
+TIME native vista.analysis it2 2.68 s maxrss 110368 KB
+TIME native vista.generate_data it3 0.82 s maxrss 72908 KB
+TIME native vista.analysis it3 2.68 s maxrss 109592 KB
+TIME native vista.generate_data it4 0.94 s maxrss 72740 KB
+TIME native vista.analysis it4 2.72 s maxrss 110400 KB
+TIME native vista.generate_data it5 0.84 s maxrss 72952 KB
+TIME native vista.analysis it5 2.66 s maxrss 110008 KB
+TIME native gemma.gen_data it1 1.37 s maxrss 68600 KB
+TIME native gemma.analyze it1 2.99 s maxrss 105712 KB
+TIME native gemma.gen_data it2 1.31 s maxrss 68668 KB
+TIME native gemma.analyze it2 2.23 s maxrss 105968 KB
+TIME native gemma.gen_data it3 1.24 s maxrss 68492 KB
+TIME native gemma.analyze it3 2.32 s maxrss 105612 KB
+TIME native gemma.gen_data it4 1.33 s maxrss 68556 KB
+TIME native gemma.analyze it4 2.20 s maxrss 105860 KB
+TIME native gemma.gen_data it5 1.27 s maxrss 68520 KB
+TIME native gemma.analyze it5 2.13 s maxrss 105728 KB
+TIME native claude.run_all it1 8.53 s maxrss 155104 KB
+TIME native claude.run_all it2 8.28 s maxrss 154196 KB
+TIME native claude.run_all it3 8.37 s maxrss 154128 KB
+TIME native claude.run_all it4 8.46 s maxrss 154488 KB
+TIME native claude.run_all it5 8.23 s maxrss 154176 KB
+IOWarp: runtime ready in 4.055055530 s
+IOWarp ON: adapter=/home/hyoklee/core_dev_miv_1020/install/lib/libclio_cte_posix.so
+adapter mapped: True
+TIME iowarp1 vista.generate_data it1 0.87 s maxrss 75760 KB
+TIME iowarp1 vista.analysis it1 2.67 s maxrss 113216 KB
+TIME iowarp1 vista.generate_data it2 0.85 s maxrss 75856 KB
+TIME iowarp1 vista.analysis it2 2.66 s maxrss 113060 KB
+TIME iowarp1 vista.generate_data it3 0.88 s maxrss 75812 KB
+TIME iowarp1 vista.analysis it3 2.63 s maxrss 113296 KB
+TIME iowarp1 vista.generate_data it4 0.87 s maxrss 75644 KB
+TIME iowarp1 vista.analysis it4 2.71 s maxrss 113052 KB
+TIME iowarp1 vista.generate_data it5 0.85 s maxrss 75724 KB
+TIME iowarp1 vista.analysis it5 2.63 s maxrss 112632 KB
+TIME iowarp1 gemma.gen_data it1 1.27 s maxrss 71908 KB
+TIME iowarp1 gemma.analyze it1 2.27 s maxrss 108356 KB
+TIME iowarp1 gemma.gen_data it2 1.34 s maxrss 72256 KB
+TIME iowarp1 gemma.analyze it2 2.36 s maxrss 109012 KB
+TIME iowarp1 gemma.gen_data it3 1.36 s maxrss 71876 KB
+TIME iowarp1 gemma.analyze it3 2.31 s maxrss 108884 KB
+TIME iowarp1 gemma.gen_data it4 1.30 s maxrss 71772 KB
+TIME iowarp1 gemma.analyze it4 2.25 s maxrss 109288 KB
+TIME iowarp1 gemma.gen_data it5 1.35 s maxrss 71748 KB
+TIME iowarp1 gemma.analyze it5 2.21 s maxrss 108876 KB
+TIME iowarp1 claude.run_all it1 8.45 s maxrss 157908 KB
+TIME iowarp1 claude.run_all it2 8.34 s maxrss 157556 KB
+TIME iowarp1 claude.run_all it3 8.32 s maxrss 157680 KB
+TIME iowarp1 claude.run_all it4 8.48 s maxrss 157556 KB
+TIME iowarp1 claude.run_all it5 8.34 s maxrss 158400 KB
+outputs vista: identical
+outputs gemma: identical
+outputs claude: DIFFER
+Files /mnt/common/hyoklee/toam_perf/iowarp_25309/native/claude/summary.json and /mnt/common/hyoklee/toam_perf/iowarp_25309/iowarp1/claude/summary.json differ
