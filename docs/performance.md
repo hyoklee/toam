@@ -52,7 +52,7 @@ Slurm accounting is disabled on Ares, so there is no job elapsed time. The 10 ti
 | Gemma 4 31B clio agent (`gen_data.py` + `analyze.py`) | 3.58 s | 104 MB | RO, Basquin, pores, El Haddad, Fatemi-Socie (FS hard-coded) |
 | Claude Code rewrite (`run_all.py`, 16 processes) | 8.28 s | 151 MB | Same five checks, plus a 4000-campaign Basquin Monte Carlo and a 0.5° Fatemi-Socie plane scan |
 
-**These numbers measure speed, not correctness.** `analysis.py` sets El Haddad's `area0` to a placeholder (`baseline**2/100`), not Eq. 4. Its TO-AB and TO-VT values (200.2 and 222.1 MPa) are therefore not Eq. 3 predictions. With Eq. 3–4 (√area0 = 448 µm), the roughness predictions are 178.5 MPa for TO-AB and 193.9 MPa for TO-VT.
+**These numbers measure speed, not correctness.** They were taken with an earlier `analysis.py` that set El Haddad's `area0` to a placeholder (`baseline**2/100`) and reported 200.2 MPa (TO-AB) and 222.1 MPa (TO-VT). `analysis.py` now applies Eq. 3–4 (√area0 = 448 µm, baseline from the Table 3 Basquin fit at 10⁷ cycles = 426.5 MPa) and reports 178.5 MPa (TO-AB) and 193.9 MPa (TO-VT).
 
 ## clio-core (IOWARP=1) on Ares
 

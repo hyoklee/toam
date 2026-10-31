@@ -8,8 +8,9 @@
 """
 import os, json, pandas as pd, numpy as np, matplotlib.pyplot as plt
 
-DATA_DIR = "./toam_repo/data"
-DOCS_DIR = "./toam_repo/docs"
+REPO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(REPO_DIR, "data")
+DOCS_DIR = os.path.join(REPO_DIR, "docs")
 os.makedirs(DOCS_DIR, exist_ok=True)
 
 # ------------------------------------------------------------
@@ -28,26 +29,27 @@ for key, fname in files.items():
 #   Rz (μm) – approximate max height: 211 for TO‑AB, 172 for TO‑VT
 #   Largest pore diameter (μm): 69.4 (Location 3)
 RZ_AB, RZ_VT = 211.0, 172.0
-PORE_DIAMETER = 69.4  # μm
 
-# Convert roughness to defect “area” ≈ 10 * Rz (as used in the manuscript)
-area_ab = 10 * RZ_AB
-area_vt = 10 * RZ_VT
-area_pore = np.pi * (PORE_DIAMETER / 2) ** 2  # circular area μm² (approx)
+# Effective defect size from roughness: √area ≈ 10 * Rz (as used in the manuscript)
+sqrt_area_ab = 10 * RZ_AB  # μm
+sqrt_area_vt = 10 * RZ_VT  # μm
 
-# Baseline endurance limit (dogbone) – take the stress at 1e7 cycles
-baseline = frames["dogbone"].set_index("cycles")["stress_range"].loc[1e7]
+# Baseline endurance limit (dogbone) – Basquin fit from Table 3 evaluated at
+# 1e7 cycles (same A, B as generate_data.py), not the scattered synthetic sample
+DOGBONE_A, DOGBONE_B = 7160.0, -0.175
+baseline = DOGBONE_A * 1e7 ** DOGBONE_B
 
-# El‑Haddad correction (Eq. 3 in paper) – simplified form
-#   σ_w = σ_w0 * area0 / (area + area0)
-# We'll compute a reduced endurance limit for each TO case.
-area0 = baseline ** 2 / (10**2)  # placeholder scaling to keep units reasonable
+# El‑Haddad intrinsic defect size (Eq. 4 in paper)
+#   √area0 = (1/π) * (ΔK_th / (Y * Δσ_w0))**2
+SQRT_AREA0 = 448.0  # μm
 
-def corrected_limit(area_defect):
-    return baseline * area0 / (area_defect + area0)
+# El‑Haddad correction (Eq. 3 in paper)
+#   Δσ_w = Δσ_w0 * sqrt(√area0 / (√area + √area0))
+def corrected_limit(sqrt_area):
+    return baseline * np.sqrt(SQRT_AREA0 / (sqrt_area + SQRT_AREA0))
 
-sigma_to_ab = corrected_limit(area_ab)
-sigma_to_vt = corrected_limit(area_vt)
+sigma_to_ab = corrected_limit(sqrt_area_ab)
+sigma_to_vt = corrected_limit(sqrt_area_vt)
 
 # ------------------------------------------------------------
 # Plot Figure 5‑style Basquin curves (stress vs cycles)
@@ -60,7 +62,7 @@ plt.title("Synthetic fatigue S–N curves (Basquin)")
 plt.legend()
 plt.grid(True, which="both", ls="--", lw=0.5)
 plt.tight_layout()
-plt.savefig("./toam_repo/fig_snn.png")
+plt.savefig(os.path.join(REPO_DIR, "fig_snn.png"))
 
 # Plot Figure 11‑style endurance limit comparison
 plt.figure(figsize=(5,3))
@@ -70,7 +72,7 @@ plt.bar(labels, values, color=["steelblue", "orange", "green"])
 plt.ylabel("Endurance limit (MPa) at 1e7 cycles")
 plt.title("Defect‑adjusted endurance limits")
 plt.tight_layout()
-plt.savefig("./toam_repo/fig_endurance.png")
+plt.savefig(os.path.join(REPO_DIR, "fig_endurance.png"))
 
 # ------------------------------------------------------------
 # Write a simple results markdown page

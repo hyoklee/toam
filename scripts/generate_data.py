@@ -15,7 +15,7 @@ BASES = {
 # Cycle range (log‑space) – typical high‑cycle fatigue regime
 cycles = np.logspace(3, 7, num=50)  # 1e3 … 1e7 cycles
 
-out_dir = "./toam_repo/data"
+out_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 os.makedirs(out_dir, exist_ok=True)
 
 for name, coeff in BASES.items():
