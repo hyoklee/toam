@@ -1,0 +1,9 @@
+host=i618-042.vista.tacc.utexas.edu start=2026-10-31T16:28:07-05:00 core=/work/11623/hyoklee/vista/build/clio-core.cae-depends-on toam=e3136ee clio-coder=Clio Coder 0.6.4
+AGENT native run1 wall=33.756344085s rc=0 python_calls=2 python_s=9.66 results_ok=yes scripts_edited=no
+AGENT native run2 wall=12.933579270s rc=0 python_calls=2 python_s=1.65 results_ok=yes scripts_edited=no
+AGENT native run3 wall=12.435713322s rc=0 python_calls=2 python_s=1.30 results_ok=yes scripts_edited=no
+IOWarp: runtime ready in 1.778135135 s
+AGENT iowarp1 run1 wall=11.756123529s rc=0 python_calls=2 python_s=1.51 results_ok=yes scripts_edited=no
+AGENT iowarp1 run2 wall=12.256611352s rc=0 python_calls=2 python_s=1.31 results_ok=yes scripts_edited=no
+AGENT iowarp1 run3 wall=13.669958542s rc=0 python_calls=2 python_s=1.21 results_ok=yes scripts_edited=no
+end=2026-10-31T16:29:47-05:00

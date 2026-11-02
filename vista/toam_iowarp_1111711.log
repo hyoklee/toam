@@ -1,0 +1,49 @@
+host=i615-053.vista.tacc.utexas.edu cpu="Neoverse-V2" start=2026-10-30T23:38:50-05:00 core=/work/11623/hyoklee/vista/build/clio-core.cae-depends-on commit=e7277f40 toam=e3136ee
+python 3.13.13 numpy 2.5.4 pandas 3.1.0 matplotlib 3.11.2
+TIME native generate_data it1 0.34 s maxrss 36864 KB
+TIME native analysis it1 0.91 s maxrss 92160 KB
+TIME native generate_data it2 0.34 s maxrss 36864 KB
+TIME native analysis it2 0.92 s maxrss 92160 KB
+TIME native generate_data it3 0.34 s maxrss 55296 KB
+TIME native analysis it3 0.92 s maxrss 92160 KB
+TIME native generate_data it4 0.33 s maxrss 36864 KB
+TIME native analysis it4 0.91 s maxrss 110592 KB
+TIME native generate_data it5 0.32 s maxrss 36864 KB
+TIME native analysis it5 0.93 s maxrss 110592 KB
+IOWarp: runtime ready in .776349574 s
+IOWarp ON: adapter=/work/11623/hyoklee/vista/build/clio-core.cae-depends-on/bin/libclio_cte_posix.so
+adapter mapped: True
+TIME iowarp1 generate_data it1 0.47 s maxrss 92160 KB
+TIME iowarp1 analysis it1 0.97 s maxrss 110592 KB
+TIME iowarp1 generate_data it2 0.38 s maxrss 73728 KB
+TIME iowarp1 analysis it2 0.98 s maxrss 129024 KB
+TIME iowarp1 generate_data it3 0.39 s maxrss 73728 KB
+TIME iowarp1 analysis it3 0.94 s maxrss 129024 KB
+TIME iowarp1 generate_data it4 0.37 s maxrss 73728 KB
+TIME iowarp1 analysis it4 0.91 s maxrss 110592 KB
+TIME iowarp1 generate_data it5 0.39 s maxrss 73728 KB
+TIME iowarp1 analysis it5 0.91 s maxrss 110592 KB
+TIME iowarp1 generate_data it1 0.41 s maxrss 92160 KB
+TIME iowarp1 analysis it1 0.94 s maxrss 110592 KB
+TIME iowarp1 generate_data it2 0.38 s maxrss 73728 KB
+TIME iowarp1 analysis it2 0.97 s maxrss 129024 KB
+TIME iowarp1 generate_data it3 0.38 s maxrss 73728 KB
+TIME iowarp1 analysis it3 0.92 s maxrss 110592 KB
+TIME iowarp1 generate_data it4 0.38 s maxrss 73728 KB
+TIME iowarp1 analysis it4 0.97 s maxrss 129024 KB
+TIME iowarp1 generate_data it5 0.38 s maxrss 73728 KB
+TIME iowarp1 analysis it5 0.94 s maxrss 110592 KB
+TIME native generate_data it1 0.34 s maxrss 73728 KB
+TIME native analysis it1 0.91 s maxrss 110592 KB
+TIME native generate_data it2 0.33 s maxrss 36864 KB
+TIME native analysis it2 0.92 s maxrss 110592 KB
+TIME native generate_data it3 0.32 s maxrss 55296 KB
+TIME native analysis it3 0.90 s maxrss 110592 KB
+TIME native generate_data it4 0.32 s maxrss 36864 KB
+TIME native analysis it4 0.88 s maxrss 92160 KB
+TIME native generate_data it5 0.31 s maxrss 36864 KB
+TIME native analysis it5 0.88 s maxrss 92160 KB
+outputs native_a vs iowarp1_a: identical
+outputs native_a vs iowarp1_b: identical
+outputs native_a vs native_b: identical
+end=2026-10-30T23:39:22-05:00
