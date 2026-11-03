@@ -1,5 +1,7 @@
 # Workflow Performance
 
+For Claude Opus 5.5, the clio agent with ALCF gpt-oss-120b and the clio agent with Nemotron 3 Nano running this workflow on ALCF Polaris, see [agents_polaris.md](agents_polaris.md).
+
 Run on TACC Vista, `gg` partition (Grace CPU node `i617-092`), Slurm job 1111429,
 Python 3.13, numpy 2.5.4, pandas 3.1.0, matplotlib 3.11.2.
 

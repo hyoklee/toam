@@ -1,0 +1,27 @@
+host=x3001c0s1b0n0 start=2026-11-03T19:11:02+00:00 toam=1beb8e8 claude=2.1.317 (Claude Code) clio-coder=Clio Coder 0.6.1 python=3.13.13 2.5.4 3.1.0 3.11.2
+BASELINE iter1 generate_s=.876573033 analysis_s=1.508229644 total_s=2.384802677
+BASELINE iter2 generate_s=.594465805 analysis_s=1.360906181 total_s=1.955371986
+BASELINE iter3 generate_s=.601915050 analysis_s=1.327681906 total_s=1.929596956
+BASELINE iter4 generate_s=.618907688 analysis_s=1.288493605 total_s=1.907401293
+BASELINE iter5 generate_s=.601587456 analysis_s=1.248103317 total_s=1.849690773
+AGENT claude run1 wall=16.042101695s rc=0 python_calls=2 python_s=1.84 results_ok=yes scripts_edited=no
+AGENT claude run2 wall=15.708597818s rc=0 python_calls=2 python_s=1.81 results_ok=yes scripts_edited=no
+AGENT claude run3 wall=17.261156730s rc=0 python_calls=2 python_s=1.78 results_ok=yes scripts_edited=no
+AGENT claude run4 wall=15.978972994s rc=0 python_calls=2 python_s=1.78 results_ok=yes scripts_edited=no
+AGENT claude run5 wall=14.340003438s rc=0 python_calls=2 python_s=1.78 results_ok=yes scripts_edited=no
+AGENT alcf run1 wall=69.417531630s rc=0 python_calls=2 python_s=1.74 results_ok=yes scripts_edited=no
+AGENT alcf run2 wall=9.466135369s rc=0 python_calls=2 python_s=1.75 results_ok=yes scripts_edited=no
+AGENT alcf run3 wall=9.477399745s rc=0 python_calls=2 python_s=1.74 results_ok=yes scripts_edited=no
+AGENT alcf run4 wall=9.806826891s rc=0 python_calls=2 python_s=1.75 results_ok=yes scripts_edited=no
+AGENT alcf run5 wall=37.595658575s rc=1 python_calls=2 python_s=1.76 results_ok=yes scripts_edited=no
+nemotron: model loaded in 11.637146378 s
+AGENT nemotron run1 wall=36.607971797s rc=0 python_calls=2 python_s=1.76 results_ok=yes scripts_edited=no
+AGENT nemotron run2 wall=7.548014608s rc=0 python_calls=2 python_s=1.76 results_ok=yes scripts_edited=no
+AGENT nemotron run3 wall=7.150296506s rc=0 python_calls=2 python_s=1.77 results_ok=yes scripts_edited=no
+AGENT nemotron run4 wall=7.164910590s rc=0 python_calls=2 python_s=1.77 results_ok=yes scripts_edited=no
+AGENT nemotron run5 wall=7.371378353s rc=0 python_calls=2 python_s=1.77 results_ok=yes scripts_edited=no
+GPU 0, 24235 MiB
+GPU 1, 1 MiB
+GPU 2, 1 MiB
+GPU 3, 16 MiB
+end=2026-11-03T19:16:37+00:00

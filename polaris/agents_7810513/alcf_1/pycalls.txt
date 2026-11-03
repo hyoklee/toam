@@ -1,0 +1,2 @@
+PYCALL .567398705 rc=0 args=scripts/generate_data.py
+PYCALL 1.174518110 rc=0 args=scripts/analysis.py
